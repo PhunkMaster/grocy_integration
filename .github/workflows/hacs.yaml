@@ -9,13 +9,15 @@ on:
       - master
   schedule:
     - cron: "0 0 * * *"
+  workflow_dispatch:
 
 jobs:
   validate:
     runs-on: "ubuntu-latest"
     steps:
-      - uses: "actions/checkout@v2"
+      - uses: actions/checkout@v4.2.2
+
       - name: HACS Action
-        uses: "hacs/action@main"
+        uses: hacs/action@2.5.0
         with:
           category: "integration"
