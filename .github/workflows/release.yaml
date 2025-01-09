@@ -1,8 +1,9 @@
 name: Release
 
 on:
-  release:
-    types: [published]
+  push:
+    tags:
+      - 'v*'
 
 jobs:
   release_zip_file:
@@ -30,7 +31,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ github.event.release.upload_url }}
-          asset_path: "${{ env.GROCY_ROOT_DIR }}/grocy.zip"
-          asset_name: grocy.zip
-          asset_content_type: application/zip
+          files: grocy.zip
