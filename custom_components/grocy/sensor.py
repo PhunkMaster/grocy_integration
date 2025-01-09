@@ -4,7 +4,7 @@ from __future__ import annotations
 import logging
 from collections.abc import Callable, Mapping
 from dataclasses import dataclass
-from typing import Any, List, Sized, Optional
+from typing import Any, List
 
 from homeassistant.components.sensor import (
     SensorEntity,
@@ -37,16 +37,16 @@ _LOGGER = logging.getLogger(__name__)
 
 
 async def async_setup_entry(
-        hass: HomeAssistant,
-        config_entry: ConfigEntry,
-        async_add_entities: AddEntitiesCallback,
+    hass: HomeAssistant,
+    config_entry: ConfigEntry,
+    async_add_entities: AddEntitiesCallback,
 ):
     """Setup sensor platform."""
     coordinator: GrocyDataUpdateCoordinator = hass.data[DOMAIN]
-    entities: list[GrocySensorEntity] = []
+    entities = []
     for description in SENSORS:
         if description.exists_fn(coordinator.available_entities):
-            entity: GrocySensorEntity = GrocySensorEntity(coordinator, description, config_entry)
+            entity = GrocySensorEntity(coordinator, description, config_entry)
             coordinator.entities.append(entity)
             entities.append(entity)
         else:
@@ -149,6 +149,6 @@ class GrocySensorEntity(GrocyEntity, SensorEntity):
     @property
     def native_value(self) -> StateType:
         """Return the value reported by the sensor."""
-        entity_data: Optional[Sized] = self.coordinator.data.get(self.entity_description.key, None)
+        entity_data = self.coordinator.data.get(self.entity_description.key, None)
 
         return len(entity_data) if entity_data else 0

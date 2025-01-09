@@ -185,7 +185,7 @@ class GrocyData:
 
 
 async def async_setup_endpoint_for_image_proxy(
-        hass: HomeAssistant, config_entry: ConfigEntry
+    hass: HomeAssistant, config_entry: ConfigEntry
 ):
     """Setup and register the image api for grocy images with HA."""
     session = async_get_clientsession(hass)
@@ -228,11 +228,11 @@ class GrocyPictureView(HomeAssistantView):
             response_headers = {}
             for name, value in resp.headers.items():
                 if name in (
-                        hdrs.CACHE_CONTROL,
-                        hdrs.CONTENT_DISPOSITION,
-                        hdrs.CONTENT_LENGTH,
-                        hdrs.CONTENT_TYPE,
-                        hdrs.CONTENT_ENCODING,
+                    hdrs.CACHE_CONTROL,
+                    hdrs.CONTENT_DISPOSITION,
+                    hdrs.CONTENT_LENGTH,
+                    hdrs.CONTENT_TYPE,
+                    hdrs.CONTENT_ENCODING,
                 ):
                     response_headers[name] = value
 
