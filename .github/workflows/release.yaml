@@ -31,4 +31,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          files: grocy.zip
+          files: "${{ env.GROCY_ROOT_DIR }}/grocy.zip"
