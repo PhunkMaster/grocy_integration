@@ -7,6 +7,7 @@ https://github.com/custom-components/grocy
 from __future__ import annotations
 
 import logging
+from logging import Logger
 from typing import List
 
 from homeassistant.config_entries import ConfigEntry
@@ -34,7 +35,7 @@ from .coordinator import GrocyDataUpdateCoordinator
 from .grocy_data import GrocyData, async_setup_endpoint_for_image_proxy
 from .services import async_setup_services, async_unload_services
 
-_LOGGER = logging.getLogger(__name__)
+_LOGGER: Logger = logging.getLogger(__name__)
 
 
 async def async_setup_entry(hass: HomeAssistant, config_entry: ConfigEntry):
@@ -60,7 +61,7 @@ async def async_unload_entry(hass: HomeAssistant, config_entry: ConfigEntry) -> 
     """Unload a config entry."""
     await async_unload_services(hass)
     if unloaded := await hass.config_entries.async_unload_platforms(
-        config_entry, PLATFORMS
+            config_entry, PLATFORMS
     ):
         del hass.data[DOMAIN]
 
@@ -69,7 +70,7 @@ async def async_unload_entry(hass: HomeAssistant, config_entry: ConfigEntry) -> 
 
 async def _async_get_available_entities(grocy_data: GrocyData) -> List[str]:
     """Return a list of available entities based on enabled Grocy features."""
-    available_entities = []
+    available_entities: list[str] = []
     grocy_config = await grocy_data.async_get_config()
     if grocy_config:
         if "FEATURE_FLAG_STOCK" in grocy_config.enabled_features:

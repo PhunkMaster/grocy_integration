@@ -4,7 +4,8 @@ from __future__ import annotations
 import logging
 from collections.abc import Callable, Mapping
 from dataclasses import dataclass
-from typing import Any, List
+from logging import Logger
+from typing import Any, List, Optional, Sized
 
 from homeassistant.components.binary_sensor import (
     BinarySensorEntity,
@@ -27,20 +28,20 @@ from .const import (
 from .coordinator import GrocyDataUpdateCoordinator
 from .entity import GrocyEntity
 
-_LOGGER = logging.getLogger(__name__)
+_LOGGER: Logger = logging.getLogger(__name__)
 
 
 async def async_setup_entry(
-    hass: HomeAssistant,
-    config_entry: ConfigEntry,
-    async_add_entities: AddEntitiesCallback,
+        hass: HomeAssistant,
+        config_entry: ConfigEntry,
+        async_add_entities: AddEntitiesCallback,
 ):
     """Setup binary sensor platform."""
     coordinator: GrocyDataUpdateCoordinator = hass.data[DOMAIN]
     entities = []
     for description in BINARY_SENSORS:
         if description.exists_fn(coordinator.available_entities):
-            entity = GrocyBinarySensorEntity(coordinator, description, config_entry)
+            entity: GrocyBinarySensorEntity = GrocyBinarySensorEntity(coordinator, description, config_entry)
             coordinator.entities.append(entity)
             entities.append(entity)
         else:
@@ -141,6 +142,6 @@ class GrocyBinarySensorEntity(GrocyEntity, BinarySensorEntity):
     @property
     def is_on(self) -> bool | None:
         """Return true if the binary sensor is on."""
-        entity_data = self.coordinator.data.get(self.entity_description.key, None)
+        entity_data: Optional[Sized] = self.coordinator.data.get(self.entity_description.key, None)
 
         return len(entity_data) > 0 if entity_data else False

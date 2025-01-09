@@ -88,18 +88,18 @@ logger:
   default: info
   logs:
     pygrocy.grocy_api_client: debug
-    custom_components.grocy: debug
+    custom_components.grocy: debug
 ```
 
 If you are having issues and want to report a problem, always start with making sure that you're on the latest _beta_ version of the integration, Grocy and Home Assistant.
 
-You can ask [make an issue with all of the relevant information here](https://github.com/custom-components/grocy/issues/new?assignees=&labels=&template=bug_report.md&title=).
+You can ask [make an issue with all the relevant information here](https://github.com/custom-components/grocy/issues/new?assignees=&labels=&template=bug_report.md&title=).
 
 
 # <a name="integration-configuration"></a>Integration configuration
 
 ## URL
-The Grocy url should be in the form below (start with `http://` or `https://`) and point to your Grocy instance. If you use a SSL certificate you should have `https` and also check the "Verify SSL Certificate" box. Do **not** enter a port in the url field. Subdomains are also supported, fill out the full url in the field.
+The Grocy url should be in the form below (start with `http://` or `https://`) and point to your Grocy instance. If you use an SSL certificate you should have `https` and also check the "Verify SSL Certificate" box. Do **not** enter a port in the url field. Subdomains are also supported, fill out the full url in the field.
 
 ## API key
 Go to your Grocy instance. Navigate via the wrench icon in the top right corner to "Manage API keys" and add a new API key. Copy and paste the generated key.
