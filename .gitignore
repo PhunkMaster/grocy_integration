@@ -128,3 +128,10 @@ dmypy.json
 .pyre/
 
 # End of https://www.gitignore.io/api/python
+/.idea/inspectionProfiles/profiles_settings.xml
+/.idea/.gitignore
+/.idea/aws.xml
+/.idea/grocy_integration.iml
+/.idea/misc.xml
+/.idea/modules.xml
+/.idea/vcs.xml

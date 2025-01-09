@@ -4,7 +4,7 @@
 	"appPort": [
 		"9123:8123"
 	],
-	"postCreateCommand": "for req in $(jq -c -r '.requirements | .[]' custom_components/grocy/manifest.json); do python -m pip install $req; done && container install",
+	"postCreateCommand": "for req in $(jq -c -r '.requirements | .[]' custom_components/grocy/manifest.json); do python -m pip install $req; done && container install", //TODO fix this
 	"extensions": [
 		"ms-python.python",
 		"github.vscode-pull-request-github",
