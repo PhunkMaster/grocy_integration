@@ -4,39 +4,40 @@ from __future__ import annotations
 import voluptuous as vol
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant, ServiceCall
-from pygrocy2.grocy import EntityType, TransactionType
+from pygrocytoo.grocy import EntityType, TransactionType
+from voluptuous import All
 
 from .const import ATTR_CHORES, ATTR_TASKS, DOMAIN
 from .coordinator import GrocyDataUpdateCoordinator
 
-SERVICE_PRODUCT_ID = "product_id"
-SERVICE_AMOUNT = "amount"
-SERVICE_PRICE = "price"
-SERVICE_SPOILED = "spoiled"
-SERVICE_SUBPRODUCT_SUBSTITUTION = "allow_subproduct_substitution"
-SERVICE_TRANSACTION_TYPE = "transaction_type"
-SERVICE_CHORE_ID = "chore_id"
-SERVICE_DONE_BY = "done_by"
-SERVICE_SKIPPED = "skipped"
-SERVICE_TASK_ID = "task_id"
-SERVICE_ENTITY_TYPE = "entity_type"
-SERVICE_DATA = "data"
-SERVICE_RECIPE_ID = "recipe_id"
-SERVICE_BATTERY_ID = "battery_id"
-SERVICE_OBJECT_ID = "object_id"
+SERVICE_PRODUCT_ID: str = "product_id"
+SERVICE_AMOUNT: str = "amount"
+SERVICE_PRICE: str = "price"
+SERVICE_SPOILED: str = "spoiled"
+SERVICE_SUBPRODUCT_SUBSTITUTION: str = "allow_subproduct_substitution"
+SERVICE_TRANSACTION_TYPE: str = "transaction_type"
+SERVICE_CHORE_ID: str = "chore_id"
+SERVICE_DONE_BY: str = "done_by"
+SERVICE_SKIPPED: str = "skipped"
+SERVICE_TASK_ID: str = "task_id"
+SERVICE_ENTITY_TYPE: str = "entity_type"
+SERVICE_DATA: str = "data"
+SERVICE_RECIPE_ID: str = "recipe_id"
+SERVICE_BATTERY_ID: str = "battery_id"
+SERVICE_OBJECT_ID: str = "object_id"
 
-SERVICE_ADD_PRODUCT = "add_product_to_stock"
-SERVICE_OPEN_PRODUCT = "open_product"
-SERVICE_CONSUME_PRODUCT = "consume_product_from_stock"
-SERVICE_EXECUTE_CHORE = "execute_chore"
-SERVICE_COMPLETE_TASK = "complete_task"
-SERVICE_ADD_GENERIC = "add_generic"
-SERVICE_UPDATE_GENERIC = "update_generic"
-SERVICE_DELETE_GENERIC = "delete_generic"
-SERVICE_CONSUME_RECIPE = "consume_recipe"
-SERVICE_TRACK_BATTERY = "track_battery"
+SERVICE_ADD_PRODUCT: str = "add_product_to_stock"
+SERVICE_OPEN_PRODUCT: str = "open_product"
+SERVICE_CONSUME_PRODUCT: str = "consume_product_from_stock"
+SERVICE_EXECUTE_CHORE: str = "execute_chore"
+SERVICE_COMPLETE_TASK: str = "complete_task"
+SERVICE_ADD_GENERIC: str = "add_generic"
+SERVICE_UPDATE_GENERIC: str = "update_generic"
+SERVICE_DELETE_GENERIC: str = "delete_generic"
+SERVICE_CONSUME_RECIPE: str = "consume_recipe"
+SERVICE_TRACK_BATTERY: str = "track_battery"
 
-SERVICE_ADD_PRODUCT_SCHEMA = vol.All(
+SERVICE_ADD_PRODUCT_SCHEMA: All = vol.All(
     vol.Schema(
         {
             vol.Required(SERVICE_PRODUCT_ID): vol.Coerce(int),
@@ -46,7 +47,7 @@ SERVICE_ADD_PRODUCT_SCHEMA = vol.All(
     )
 )
 
-SERVICE_OPEN_PRODUCT_SCHEMA = vol.All(
+SERVICE_OPEN_PRODUCT_SCHEMA: All = vol.All(
     vol.Schema(
         {
             vol.Required(SERVICE_PRODUCT_ID): vol.Coerce(int),
@@ -56,7 +57,7 @@ SERVICE_OPEN_PRODUCT_SCHEMA = vol.All(
     )
 )
 
-SERVICE_CONSUME_PRODUCT_SCHEMA = vol.All(
+SERVICE_CONSUME_PRODUCT_SCHEMA: All = vol.All(
     vol.Schema(
         {
             vol.Required(SERVICE_PRODUCT_ID): vol.Coerce(int),
@@ -68,7 +69,7 @@ SERVICE_CONSUME_PRODUCT_SCHEMA = vol.All(
     )
 )
 
-SERVICE_EXECUTE_CHORE_SCHEMA = vol.All(
+SERVICE_EXECUTE_CHORE_SCHEMA: All = vol.All(
     vol.Schema(
         {
             vol.Required(SERVICE_CHORE_ID): vol.Coerce(int),
@@ -78,7 +79,7 @@ SERVICE_EXECUTE_CHORE_SCHEMA = vol.All(
     )
 )
 
-SERVICE_COMPLETE_TASK_SCHEMA = vol.All(
+SERVICE_COMPLETE_TASK_SCHEMA: All = vol.All(
     vol.Schema(
         {
             vol.Required(SERVICE_TASK_ID): vol.Coerce(int),
@@ -86,7 +87,7 @@ SERVICE_COMPLETE_TASK_SCHEMA = vol.All(
     )
 )
 
-SERVICE_ADD_GENERIC_SCHEMA = vol.All(
+SERVICE_ADD_GENERIC_SCHEMA: All = vol.All(
     vol.Schema(
         {
             vol.Required(SERVICE_ENTITY_TYPE): str,
@@ -95,7 +96,7 @@ SERVICE_ADD_GENERIC_SCHEMA = vol.All(
     )
 )
 
-SERVICE_UPDATE_GENERIC_SCHEMA = vol.All(
+SERVICE_UPDATE_GENERIC_SCHEMA: All = vol.All(
     vol.Schema(
         {
             vol.Required(SERVICE_ENTITY_TYPE): str,
@@ -105,7 +106,7 @@ SERVICE_UPDATE_GENERIC_SCHEMA = vol.All(
     )
 )
 
-SERVICE_DELETE_GENERIC_SCHEMA = vol.All(
+SERVICE_DELETE_GENERIC_SCHEMA: All = vol.All(
     vol.Schema(
         {
             vol.Required(SERVICE_ENTITY_TYPE): str,
@@ -114,7 +115,7 @@ SERVICE_DELETE_GENERIC_SCHEMA = vol.All(
     )
 )
 
-SERVICE_CONSUME_RECIPE_SCHEMA = vol.All(
+SERVICE_CONSUME_RECIPE_SCHEMA: All = vol.All(
     vol.Schema(
         {
             vol.Required(SERVICE_RECIPE_ID): vol.Coerce(int),
@@ -122,7 +123,7 @@ SERVICE_CONSUME_RECIPE_SCHEMA = vol.All(
     )
 )
 
-SERVICE_TRACK_BATTERY_SCHEMA = vol.All(
+SERVICE_TRACK_BATTERY_SCHEMA: All = vol.All(
     vol.Schema(
         {
             vol.Required(SERVICE_BATTERY_ID): vol.Coerce(int),
@@ -130,7 +131,7 @@ SERVICE_TRACK_BATTERY_SCHEMA = vol.All(
     )
 )
 
-SERVICES_WITH_ACCOMPANYING_SCHEMA: list[tuple[str, vol.Schema]] = [
+SERVICES_WITH_ACCOMPANYING_SCHEMA: list[tuple[str, vol.All]] = [
     (SERVICE_ADD_PRODUCT, SERVICE_ADD_PRODUCT_SCHEMA),
     (SERVICE_OPEN_PRODUCT, SERVICE_OPEN_PRODUCT_SCHEMA),
     (SERVICE_CONSUME_PRODUCT, SERVICE_CONSUME_PRODUCT_SCHEMA),
@@ -145,7 +146,7 @@ SERVICES_WITH_ACCOMPANYING_SCHEMA: list[tuple[str, vol.Schema]] = [
 
 
 async def async_setup_services(
-    hass: HomeAssistant, config_entry: ConfigEntry  # pylint: disable=unused-argument
+        hass: HomeAssistant, config_entry: ConfigEntry  # pylint: disable=unused-argument
 ) -> None:
     """Set up services for Grocy integration."""
     coordinator: GrocyDataUpdateCoordinator = hass.data[DOMAIN]
@@ -154,8 +155,8 @@ async def async_setup_services(
 
     async def async_call_grocy_service(service_call: ServiceCall) -> None:
         """Call correct Grocy service."""
-        service = service_call.service
-        service_data = service_call.data
+        service: ServiceCall.service = service_call.service
+        service_data: ServiceCall.data = service_call.data
 
         if service == SERVICE_ADD_PRODUCT:
             await async_add_product_service(hass, coordinator, service_data)
@@ -289,7 +290,7 @@ async def async_add_generic_service(hass, coordinator, data):
         coordinator.grocy_api.add_generic(entity_type, data)
 
     await hass.async_add_executor_job(wrapper)
-    await post_generic_refresh(coordinator, entity_type);
+    await post_generic_refresh(coordinator, entity_type)
 
 
 async def async_update_generic_service(hass, coordinator, data):
@@ -308,7 +309,7 @@ async def async_update_generic_service(hass, coordinator, data):
         coordinator.grocy_api.update_generic(entity_type, object_id, data)
 
     await hass.async_add_executor_job(wrapper)
-    await post_generic_refresh(coordinator, entity_type);
+    await post_generic_refresh(coordinator, entity_type)
 
 
 async def async_delete_generic_service(hass, coordinator, data):
@@ -325,12 +326,13 @@ async def async_delete_generic_service(hass, coordinator, data):
         coordinator.grocy_api.delete_generic(entity_type, object_id)
 
     await hass.async_add_executor_job(wrapper)
-    await post_generic_refresh(coordinator, entity_type);
+    await post_generic_refresh(coordinator, entity_type)
 
 
 async def post_generic_refresh(coordinator, entity_type):
     if entity_type == "tasks" or entity_type == "chores":
         await _async_force_update_entity(coordinator, entity_type)
+
 
 async def async_consume_recipe_service(hass, coordinator, data):
     """Consume a recipe in Grocy."""
@@ -353,7 +355,7 @@ async def async_track_battery_service(hass, coordinator, data):
 
 
 async def _async_force_update_entity(
-    coordinator: GrocyDataUpdateCoordinator, entity_key: str
+        coordinator: GrocyDataUpdateCoordinator, entity_key: str
 ) -> None:
     """Force entity update for given entity key."""
     entity = next(

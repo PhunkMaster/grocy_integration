@@ -1,4 +1,5 @@
-This repository is no longer actively maintained.
+This repository is maintained by @PhunkMaster.
+This was forked for my own use.
 
 [![hacs_badge](https://img.shields.io/badge/HACS-Default-orange.svg)](https://github.com/hacs/integration)
 
@@ -7,7 +8,7 @@ This repository is no longer actively maintained.
 
 **The integration supports Grocy version 3.2 and above.**
 
-**At least Home Assistant version 2021.12 is required for the integration from v4.3.3 and above.**
+**At least Home Assistant version 2025.1.1 is required for the integration from v2025.1.1 and above.**
 
 You have to have the Grocy software already installed and running, this integration only communicates with an existing installation of Grocy. You can install the software with the [Grocy add-on](https://github.com/hassio-addons/addon-grocy) or another installation method, found at [Grocy website](https://grocy.info/).
 
@@ -78,11 +79,6 @@ Executes the given chore with an optional timestamp and executor.
 Consumes the given recipe.
 
 
-# Translations
-
-Translations are done via [Lokalise](https://app.lokalise.com/public/260939135f7593a05f2b79.75475372/). If you want to translate into your native language, please [join the team](https://app.lokalise.com/public/260939135f7593a05f2b79.75475372/).
-
-
 # Troubleshooting
 
 If you have problems with the integration you can add debug prints to the log.
@@ -92,18 +88,18 @@ logger:
   default: info
   logs:
     pygrocy.grocy_api_client: debug
-    custom_components.grocy: debug
+    custom_components.grocy: debug
 ```
 
 If you are having issues and want to report a problem, always start with making sure that you're on the latest _beta_ version of the integration, Grocy and Home Assistant.
 
-You can ask for help [in the forums](https://community.home-assistant.io/t/grocy-custom-component-and-card-s/218978), or [make an issue with all of the relevant information here](https://github.com/custom-components/grocy/issues/new?assignees=&labels=&template=bug_report.md&title=).
+You can ask [make an issue with all the relevant information here](https://github.com/custom-components/grocy/issues/new?assignees=&labels=&template=bug_report.md&title=).
 
 
 # <a name="integration-configuration"></a>Integration configuration
 
 ## URL
-The Grocy url should be in the form below (start with `http://` or `https://`) and point to your Grocy instance. If you use a SSL certificate you should have `https` and also check the "Verify SSL Certificate" box. Do **not** enter a port in the url field. Subdomains are also supported, fill out the full url in the field.
+The Grocy url should be in the form below (start with `http://` or `https://`) and point to your Grocy instance. If you use an SSL certificate you should have `https` and also check the "Verify SSL Certificate" box. Do **not** enter a port in the url field. Subdomains are also supported, fill out the full url in the field.
 
 ## API key
 Go to your Grocy instance. Navigate via the wrench icon in the top right corner to "Manage API keys" and add a new API key. Copy and paste the generated key.

@@ -19,10 +19,10 @@ class GrocyEntity(CoordinatorEntity[GrocyDataUpdateCoordinator]):
     """Grocy base entity definition."""
 
     def __init__(
-        self,
-        coordinator: GrocyDataUpdateCoordinator,
-        description: EntityDescription,
-        config_entry: ConfigEntry,
+            self,
+            coordinator: GrocyDataUpdateCoordinator,
+            description: EntityDescription,
+            config_entry: ConfigEntry,
     ) -> None:
         """Initialize entity."""
         super().__init__(coordinator)

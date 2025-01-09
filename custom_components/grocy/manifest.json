@@ -1,19 +1,18 @@
 {
   "domain": "grocy",
-  "name": "Grocy",
+  "name": "Grocy Too",
   "codeowners": [
-    "@SebRut",
-    "@isabellaalstrom"
+    "@phunkmaster"
   ],
   "config_flow": true,
   "dependencies": [
     "http"
   ],
-  "documentation": "https://github.com/custom-components/grocy",
+  "documentation": "https://github.com/phunkmaster/grocy_component",
   "iot_class": "local_polling",
-  "issue_tracker": "https://github.com/custom-components/grocy/issues",
+  "issue_tracker": "https://github.com/phunkmaster/grocy_component/issues",
   "requirements": [
-    "pygrocy2==2.3.3"
+    "git+https://github.com/phunkmaster/pygrocytoo.git@phunk_1#pygrocytoo"
   ],
   "version": "0.0.0"
 }

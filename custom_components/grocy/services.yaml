@@ -180,7 +180,7 @@ add_generic:
       name: Data
       description: "JSON object with what data you want to add (yaml format also works). See Grocy api documentation on Generic entity interactions: https://demo.grocy.info/api"
       required: true
-      default: {"name": "Task name", "due_date": "2021-05-21"}
+      default: { "name": "Task name", "due_date": "2021-05-21" }
       selector:
         object:
 
@@ -232,7 +232,7 @@ update_generic:
       name: Data
       description: "JSON object with what data you want to update (yaml format also works). See Grocy api documentation on Generic entity interactions: https://demo.grocy.info/api"
       required: true
-      default: {"name": "Task name", "due_date": "2021-05-21"}
+      default: { "name": "Task name", "due_date": "2021-05-21" }
       selector:
         object:
 
