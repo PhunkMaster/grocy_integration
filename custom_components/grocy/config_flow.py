@@ -1,13 +1,10 @@
 """Adds config flow for Grocy."""
 import logging
 from collections import OrderedDict
-from logging import Logger
-from typing import Any, Type
 
 import voluptuous as vol
 from homeassistant import config_entries
 from pygrocytoo.grocy import Grocy
-from voluptuous import Required, Optional
 
 from .const import (
     CONF_API_KEY,
@@ -20,15 +17,14 @@ from .const import (
 )
 from .helpers import extract_base_url_and_path
 
-_LOGGER: Logger = logging.getLogger(__name__)
+_LOGGER = logging.getLogger(__name__)
 
 
 class GrocyFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
     """Config flow for Grocy."""
-    _errors: dict[Any, Any]
 
-    VERSION: int = 1
-    CONNECTION_CLASS: str = config_entries.CONN_CLASS_CLOUD_POLL
+    VERSION = 1
+    CONNECTION_CLASS = config_entries.CONN_CLASS_CLOUD_POLL
 
     def __init__(self):
         """Initialize."""
@@ -43,7 +39,7 @@ class GrocyFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
             return self.async_abort(reason="single_instance_allowed")
 
         if user_input is not None:
-            valid: bool = await self._test_credentials(
+            valid = await self._test_credentials(
                 user_input[CONF_URL],
                 user_input[CONF_API_KEY],
                 user_input[CONF_PORT],
@@ -61,7 +57,7 @@ class GrocyFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
 
     async def _show_config_form(self, user_input):  # pylint: disable=unused-argument
         """Show the configuration form to edit the data."""
-        data_schema: OrderedDict[Required | Optional, Type[str | int | bool]] = OrderedDict()
+        data_schema = OrderedDict()
         data_schema[vol.Required(CONF_URL, default="")] = str
         data_schema[
             vol.Required(
@@ -82,10 +78,8 @@ class GrocyFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
     async def _test_credentials(self, url, api_key, port, verify_ssl):
         """Return true if credentials is valid."""
         try:
-            base_url: str
-            path: str
             (base_url, path) = extract_base_url_and_path(url)
-            client: Grocy = Grocy(
+            client = Grocy(
                 base_url, api_key, port=port, path=path, verify_ssl=verify_ssl
             )
 
